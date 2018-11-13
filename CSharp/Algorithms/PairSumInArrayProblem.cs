@@ -9,6 +9,13 @@ namespace Algorithms
     {
         public bool HasPairSumInArray(int[] values, int sum)
         {
+            if (values == null) return false;
+            ISet<int> complements = new HashSet<int>(); // O(1)
+            foreach (int value in values) // O(N)
+            {
+                if (complements.Contains(value)) return true;
+                complements.Add(sum - value);
+            }
             return false;
         }
     }
