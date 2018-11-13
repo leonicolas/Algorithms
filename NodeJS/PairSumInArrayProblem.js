@@ -1,6 +1,13 @@
 require('chai').should();
 
 function hasPairSumInArray(values, sum) {
+    let complements = {};
+    if (!Array.isArray(values) || sum === null || sum === undefined) return false;
+    for (let i = 0, len = values.length; i < len; i++) {
+        let value = values[i];
+        if (complements[value]) return true;
+        complements[sum - value] = 1;
+    }
     return false;
 }
 
