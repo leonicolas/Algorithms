@@ -1,6 +1,5 @@
 ﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using System.Linq;
 
 namespace Algorithms
@@ -15,39 +14,31 @@ namespace Algorithms
             }
 
             int length = value.Length;
-            int position = length;
             int increment = 1;
             int maxNumber = 9;
 
-            while (position > 0)
+            for (int i = length - 1; i >= 0; i--)
             {
-                position--;
-
-                int number = value[position];
+                int number = value[i];
                 int result = number + increment;
-
-                if (result > maxNumber)
+                if (i == 0 &&
+                    result > maxNumber)
+                {
+                    int[] arr = new int[length + 1];
+                    arr[0] = 1;
+                    return arr;
+                }
+                else if (result > maxNumber)
                 {
                     increment = 1;
-                    value[position] = 0;
+                    value[i] = 0;
                 }
                 else
                 {
                     increment = 0;
-                    value[position] = result;
+                    value[i] = result;
                 }
-
-                if (position == 0 &&
-                    result > maxNumber &&
-                    result % maxNumber > 0)
-                {
-
-                    int[] arr = new int[length + 1];
-                    arr[0] = 1;
-
-                    return arr;
-                }
-            };
+            }
 
             return value;
         }
@@ -69,6 +60,15 @@ namespace Algorithms
         {
             int[] sequence = new int[] { };
             int[] expectedSequence = new int[] { };
+            int[] result = ArrayIncrementProblem.Increment(sequence);
+            Enumerable.SequenceEqual(result, expectedSequence).Should().BeTrue();
+        }
+
+        [TestMethod]
+        public void After_incrementing_it_must_have_the_expected_sequence_0()
+        {
+            int[] sequence = new int[] { 9 };
+            int[] expectedSequence = new int[] { 1, 0 };
             int[] result = ArrayIncrementProblem.Increment(sequence);
             Enumerable.SequenceEqual(result, expectedSequence).Should().BeTrue();
         }
@@ -144,7 +144,6 @@ namespace Algorithms
             int[] result = ArrayIncrementProblem.Increment(sequence);
             Enumerable.SequenceEqual(result, expectedSequence).Should().BeTrue();
         }
-
 
         [TestMethod]
         public void After_incrementing_it_must_have_the_expected_sequence_9()
