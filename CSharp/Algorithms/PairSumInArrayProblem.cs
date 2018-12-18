@@ -10,10 +10,10 @@ namespace Algorithms
         public bool HasPairSumInArray(int[] values, int sum)
         {
             if (values == null) return false;
-            ISet<int> complements = new HashSet<int>(); // O(1)
+            ISet<int> complements = new HashSet<int>();
             foreach (int value in values) // O(N)
             {
-                if (complements.Contains(value)) return true;
+                if (complements.Contains(value)) return true; // O(1)
                 complements.Add(sum - value);
             }
             return false;
