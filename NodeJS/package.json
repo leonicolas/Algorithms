@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "PairSumInArrayProblem": "mocha --colors ./PairSumInArrayProblem.js"
+    "PairSumInArrayProblem": "mocha --colors ./src/PairSumInArrayProblem.js",
+    "ReverseInteger": "mocha --colors ./src/ReverseInteger.js"
   },
   "author": "Leonardo Nicolas",
   "license": "ISC",
